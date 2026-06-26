@@ -399,8 +399,9 @@ body{
 .knowledge__row{
     display: flex;
     justify-content: center;
-    margin-top: 63px;
+    margin-top: 6px;
     flex-wrap: wrap;
+    gap: 30px;
     
 }
 .knowledge__item{
@@ -410,7 +411,6 @@ body{
     text-align: center;
     border-radius: 0 0 40px 40px;
     position: relative;
-    margin-right: 34px;
     margin-bottom: 55px;
 }
 .knowledge__item:last-child{
@@ -421,8 +421,7 @@ body{
     height: auto;
 }
 .knowledge__main{
-    margin-top: 33px;
-    margin-bottom: 39px;
+    margin: 35px 0;
     font-size: 18px;
     font-weight: 700;
     line-height: 22px;

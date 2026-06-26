@@ -1,0 +1,980 @@
+/* ==========================================================================
+   1. Сброс стилей и базовые настройки (Reset & Base)
+   ========================================================================== */
+   *,
+   *::before,
+   *::after {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+   }
+   
+   :root {
+     --bg-main: #0b0f14;
+     --bg-card: #141922;
+     --accent-color: #F82C56;
+     --btn-color: #ffcc00;
+     --text-white: #ffffff;
+     --text-gray: #a0a5b0;
+     --font-main: 'Arial', sans-serif;
+   }
+
+   html {
+    scroll-behavior: smooth; /* Включает плавную анимацию прокрутки */
+  }
+  section {
+    /* высота фиксированной шапки */
+    scroll-margin-top: 80px; 
+  }
+   
+   body {
+     font-family: var(--font-main);
+     background-color: var(--bg-main);
+     color: var(--text-white);
+     line-height: 1.5;
+     overflow-x: hidden;         /* Защита от случайного горизонтального скролла */
+   }
+   
+   a {
+     text-transform: none;
+     text-decoration: none;
+     color: inherit;
+   }
+   
+   button {
+     font-family: inherit;
+   }
+   
+   /* ==========================================================================
+      2. Глобальные компоненты (Layout Components)
+      ========================================================================== */
+   .container {
+     width: 100%;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 0 15px;
+   }
+   
+   /* Глобальный компонент кнопки */
+   .btn {
+     display: inline-block;
+     padding: 12px 30px;
+     background-color: #FEE227;
+     color: #000000;
+     font-weight: 700;
+     border: none;
+     border-radius: 4px;
+     font-size: 14px;
+     letter-spacing: 1px;
+     cursor: pointer;
+     transition: background-color 0.3s ease, transform 0.2s ease;
+   }
+   
+   .btn:hover {
+     background-color: #bfaf49;
+   }
+   
+   .btn:active {
+     transform: scale(0.98);
+   }
+   
+   .header {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     padding: 30px 0;
+     background-color: transparent;
+     z-index: 100;
+     background-color: rgba(0, 0, 0,1); /* Шапка всегда поверх контента */
+   }
+   
+   .header__container {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+   }
+   
+   .header__logo {
+     font-weight: 700;
+     font-size: 20px;
+     letter-spacing: 2px;
+   }
+   
+   .header__nav {
+     display: flex;
+     gap: 30px;
+   }
+   
+   .header__link {
+     color: var(--text-white);
+     font-size: 14px;
+     font-weight: 500;
+     transition: color 0.3s ease;
+   }
+   
+   .header__link:hover {
+     color: var(--accent-color);
+   }
+   /* Стили для активного пункта меню */
+.header__link.active {
+    color: var(--accent-color);
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(254, 226, 39, 0.4); /* Легкое неоновое свечение */
+  }
+   
+   /* Компонент Бургера (кнопка) */
+   .header__burger {
+     display: none;                /* Скрыта на десктопе */
+     background: none;
+     border: none;
+     width: 30px;
+     height: 20px;
+     position: relative;
+     cursor: pointer;
+     z-index: 101;                 
+   }
+   
+   /* Три полоски бургера */
+   .header__burger-line,
+   .header__burger::before,
+   .header__burger::after {
+     content: "";
+     position: absolute;
+     left: 0;
+     width: 100%;
+     height: 2px;
+     background-color: var(--text-white);
+     transition: transform 0.3s ease, top 0.3s ease, opacity 0.3s ease;
+   }
+   
+   .header__burger::before {
+     top: 0;
+   }
+   
+   .header__burger-line {
+     top: 9px;
+   }
+   
+   .header__burger::after {
+     top: 18px;
+   }
+   
+   /* ==========================================================================
+      4. Блок Hero (Первый экран)
+      ========================================================================== */
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+      
+      /* Родоначальник блока — идет на всю ширину экрана */
+      .hero {
+        position: relative;
+        width: 100%;
+        min-height: 100vh; /* Занимает всю высоту экрана */
+        display: flex;
+        align-items: center; /* Центрируем контент по вертикали */
+        
+        /* Фоновое изображение со сценическим светом и наложением темного градиента для читаемости */
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('/rock-band/img/main-img.webp');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        
+        padding: 20px 0; /* Безопасные отступы для мобилок и шапки */
+      }
+      
+      /* Ограничиваем ширину текстового блока внутри контейнера, как на макете */
+      .hero__content {
+        max-width: 1060px; /* Текст не должен растягиваться на все 1200px, держим его кучно слева */
+      }
+      
+      .hero__title {
+        font-size: 48px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 20px;
+      }
+      
+      .hero__subtitle {
+        font-size: 20px;
+        color: #ffffff;
+        margin-bottom: 30px;
+        font-weight: 400;
+      }
+      
+      .hero__text {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #e0e0e0;
+        margin-bottom: 20px;
+      }
+      
+      /* Голубые акценты в тексте ("потужних", "Наші концерти") */
+      .hero__highlight-blue {
+        color: #00b4d8;
+        font-weight: 600;
+      }
+      
+      /* Кнопка "Заказати квиток" */
+      .hero__btn {
+        position: relative;
+        padding: 16px 40px;
+        background-color: #FEE227;
+        color: #010000;
+        font-weight: 700;
+        border: none;
+        border-radius: 15px;
+        overflow: hidden; /* Обязательно, чтобы волна света не вылетала за края кнопки */
+        cursor: pointer;
+        text-transform: uppercase;
+      }
+      
+      /* Бегущий блик */
+      .hero__btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%; /* Прячем блик слева за кнопкой */
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          #FEE227,
+          transparent
+        );
+        transform: skewX(-25deg); /* Наклоняем полоску света для динамики */
+        transition: none;
+      }
+      
+      /* Запускаем волну света при наведении (можно сделать и бесконечной через animation) */
+      .hero__btn:hover::before {
+        left: 150%;
+        transition: left 0.7s ease-in-out;
+      }
+      
+    /* ==========================================================================
+      6. Блок Concerts (Концерты)
+      ========================================================================== */
+      .btn--accent {
+        background-color: var(--accent-color);
+        color: var(--text-white);
+      }
+      
+      .btn--accent:hover {
+        background-color: #e61f47;
+        box-shadow: 0 4px 18px 0 rgba(248, 44, 86, 0.15); /* Легкая подсветка вокруг */
+        transform: translateY(-2px) scale(1.04); /* Легкое "всплытие" и увеличение */
+        transition: 
+          background-color 0.2s,
+          box-shadow 0.2s,
+          transform 0.17s cubic-bezier(.33,1.34,.66,1);
+  
+      }
+ 
+        
+      
+      
+      /* ==========================================================================
+         Блок Concerts
+         ========================================================================== */
+      .concerts {
+        padding: 60px 0;
+        background-color: var(--bg-main);
+      }
+      
+      /* Сама плашка с фоном */
+      .concerts__box {
+        background-color: var(--bg-card); /* #141922 */
+        border-radius: 8px;
+        padding: 40px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+      
+      .concerts__title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 30px;
+      }
+      
+      /* Шапка таблицы на десктопе */
+      .concerts__header {
+        display: flex;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--text-gray);
+        font-size: 14px;
+        font-weight: 500;
+      }
+      
+      /* Ряды с концертами */
+      .concerts__row {
+        display: flex;
+        align-items: center;
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: background-color 0.2s ease;
+      }
+      
+      .concerts__row:last-child {
+        border-bottom: none; /* У последнего ряда убираем линию */
+      }
+      
+      /* Распределяем ширину колонок через flex-basis или flex */
+      .concerts__col {
+        flex: 1;
+        padding-right: 15px;
+        font-size: 15px;
+      }
+      
+      /* Задаем кастомную пропорцию колонкам */
+      .concerts__col--place {
+        flex: 2; /* Город и заведение занимают больше места */
+      }
+      
+      .concerts__col--seats {
+        flex: 1;
+      }
+      
+      .concerts__col--date {
+        flex: 2;
+      }
+      
+      .concerts__col--action {
+        flex: 1.2;
+        text-align: right;
+        padding-right: 0;
+      }
+      
+      .concerts__btn {
+        /* Существующие стили */
+        padding: 10px 20px;
+        font-size: 13px;
+        white-space: nowrap;
+        border-radius: 12px;
+        background-color: #F82C56;
+        color: var(--text-white);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      }
+      .concerts__btn:hover {
+        background: linear-gradient(90deg, #F82C56 0%, #FFAF7B 100%);
+        color: #fff;
+        transform: translateY(-2px) scale(1.04);
+        box-shadow: 0 4px 16px 0 rgba(248,44,86,0.18), 0 2px 8px 0 rgba(255,175,123,0.18);
+      }
+      .concerts__btn::before {
+        content: "";
+        position: absolute;
+        left: -50%;
+        top: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 70%);
+        opacity: 0;
+        transition: opacity 0.4s;
+        z-index: -1;
+        pointer-events: none;
+      }
+      .concerts__btn:hover::before {
+        opacity: 1;
+      }
+ 
+
+      
+      /* ==========================================================================
+   Блок Team (Учасники гурту)
+   ========================================================================== */
+.team {
+    padding: 60px 0;
+    background-color: var(--bg-main);
+  }
+  
+  .team__title {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  /* Сетка на CSS Grid */
+  .team__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px; /* Отступы между карточками */
+  }
+  
+  /* Элемент: Карточка */
+  .team__card {
+    background-color: var(--bg-card); /* Наша темная подложка #141922 */
+    border-radius: 12px;
+    overflow: hidden; /* Чтобы картинка не вылезала за скругленные края карточки */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .team__card:hover {
+    transform: translateY(-5px); /* Легкий интерактив при наведении */
+  }
+  
+  /* Обертка для картинок, чтобы держать пропорции */
+  .team__image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 75%; /* Соотношение сторон 4:3. Если нужно как на макете, можно поиграть с % */
+  }
+  
+  .team__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Картинка заполняет область без деформации */
+  }
+  
+  /* Текстовый блок подписи */
+  .team__info {
+    padding: 20px;
+  }
+  
+  .team__name {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-gray); /* Светло-серый приглушенный цвет */
+  }
+  
+  
+   /* Блок About (Наша історія) */
+   
+   .about {
+    padding: 80px 0;
+    background: linear-gradient(to right,  #1A1C24 30%, #24141A 100% );
+  }
+  
+  .about__box {
+    width: 100%;
+  }
+  
+  /* Очистка потока (Clearfix) — обязательна, чтобы float не ломал следующие блоки сайта */
+  .about__box::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  .about__title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--text-white);
+  }
+  
+  /* Элемент картинки: задаем float для обтекания текста */
+  .about__media {
+    float: right;
+    width: 39%;           /* Картинка занимает чуть меньше половины ширины */
+    margin-left: 35px;    /* Безопасный отступ слева, чтобы текст не прижимался к фото */
+    margin-bottom: 15px;  /* Отступ снизу */
+  }
+  
+  .about__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+  
+  .about__text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+  }
+  
+  .about__text:last-child {
+    margin-bottom: 0;
+  }
+
+
+   /* Блок Contacts (Зв'яжись з нами) */
+ 
+.contacts {
+    padding: 80px 0;
+    /* Тот самый градиент из макета */
+    background: linear-gradient(135deg, #24141A 0%, #1A1C24 100%);
+  }
+  
+  .contacts__head {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .contacts__title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--text-white);
+  }
+  
+  .contacts__subtitle {
+    font-size: 15px;
+    color: var(--text-gray);
+  }
+  
+  /* Сетка Flexbox для распределения формы и карты */
+  .contacts__body {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  
+  /* Форма занимает чуть больше половины */
+  .contacts__form {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .contacts__row {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .contacts__field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .contacts__label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-gray);
+  }
+  
+  /* Инпуты и Текстареа */
+  .contacts__input,
+  .contacts__textarea {
+    width: 100%;
+    background-color: #141922; /* Цвет темных полей */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: 14px 18px;
+    color: var(--text-white);
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .contacts__input:focus,
+  .contacts__textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 8px rgba(255, 42, 109, 0.2);
+  }
+  
+  .contacts__textarea {
+    height: 120px;
+    resize: none; /* Запрещаем менять размер текстового поля */
+  }
+  
+  .contacts__btn {
+    align-self: flex-start; /* Кнопка не растягивается на всю ширину */
+    padding: 12px 35px;
+  }
+  
+  /* Картка з картой справа */
+  .contacts__map-card {
+    flex: 0.8;
+    background-color: #141A20; /* Цвет карточки */
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .contacts__map-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-white);
+  }
+  
+  /* Контейнер для iframe, чтобы карта была отзывчивой */
+  .contacts__map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+
+   /* Блок Footer (Підвал сайту) */
+
+.footer {
+    padding: 40px 0 30px;
+    background-color: #0b0f14; /* Глубокий темный фон подвала */
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Едва заметная разделяющая полоса */
+  }
+  
+  .footer__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Отступ между верхней строкой и контактами */
+  }
+  
+  /* Строки футера */
+  .footer__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Нижняя строка просто идет обычным блоком (или флексом налево) */
+  .footer__row--contacts {
+    justify-content: flex-start;
+  }
+  
+  .footer__copy {
+    font-size: 14px;
+    color: var(--text-gray); 
+  }
+  
+  /* Ссылки на соцсети */
+  .footer__socials {
+    display: flex;
+    gap: 15px; 
+  }
+  
+  .footer__link {
+    font-size: 14px;
+    color: var(--text-white);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .footer__link:hover {
+    color: var(--accent-color); 
+  }
+  
+  .footer__contacts {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+  }
+  
+  .footer__contact-link {
+    color: var(--text-white);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .footer__contact-link[href^="mailto:"] {
+    font-weight: 700;
+  }
+  
+  .footer__contact-link:hover {
+    color: var(--accent-color);
+  }
+  
+  .footer__divider {
+    color: var(--text-gray);
+    font-weight: 700;
+  }
+      /* 5. Адаптивные медиа-запросы (Media Queries) */
+
+   @media (max-width: 768px) {
+     /* Показываем иконку бургера */
+     .header__burger {
+       display: block;
+     }
+   
+     /* Перестраиваем навигацию в выезжающую панель */
+     .header__nav {
+       position: fixed;
+       top: 0;
+       right: -100%;              /* Изначально спрятана справа */
+       width: 280px;
+       height: 100vh;
+       background-color: var(--bg-card);
+       flex-direction: column;
+       padding: 100px 40px;
+       gap: 25px;
+       transition: right 0.3s ease-in-out;
+       box-shadow: -5px 0 25px rgba(0, 0, 0, 0.6);
+     }
+   
+     /* Класс-модификатор для открытия мобильного меню */
+     .header__nav--open {
+       right: 0;
+     }
+   
+     .header__link {
+       font-size: 18px;           /* На мобилках ссылки делаем крупнее для пальца */
+     }
+   
+     /* Анимация превращения бургера в крестик */
+     .header__burger--active .header__burger-line {
+       opacity: 0;                /* Скрываем среднюю линию */
+     }
+   
+     .header__burger--active::before {
+       top: 9px;
+       transform: rotate(45deg);  /* Поворачиваем верхнюю */
+     }
+   
+     .header__burger--active::after {
+       top: 9px;
+       transform: rotate(-45deg); /* Поворачиваем нижнюю */
+     }
+   
+     /* Корректируем размеры текста первого экрана под мобильные устройства */
+     .hero__title {
+       font-size: 32px;
+     }
+   
+     .hero__subtitle {
+       font-size: 16px;
+       margin-bottom: 25px;
+     }
+   }/* ==========================================================================
+   Кнопка Бургера (по умолчанию скрыта на десктопе)
+   ========================================================================== */
+.header__burger {
+    display: none; /* На больших экранах прячем */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 101; /* Чтобы быть поверх выезжающего меню */
+  }
+  
+  /* Стилизуем каждую из трех полосок <span> */
+  .header__burger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-white);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  /* ==========================================================================
+     Адаптив и Анимация в крестик (Медиа-запрос)
+     ========================================================================== */
+  @media (max-width: 768px) {
+    .header__burger {
+      display: flex; /* Проявляем бургер на мобилках */
+    }
+  
+    /* ------------------------------------------------------------------------
+       Трансформация в крестик при добавлении класса-модификатора --active
+       ------------------------------------------------------------------------ */
+    
+    /* 1. Верхняя полоска (поворот на 45 градусов и сдвиг вниз) */
+    .header__burger--active span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+  
+    /* 2. Средняя полоска (просто растворяется) */
+    .header__burger--active span:nth-child(2) {
+      opacity: 0;
+    }
+  
+    /* 3. Нижняя полоска (поворот на -45 градусов и сдвиг вверх) */
+    .header__burger--active span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+  }
+      /* Минимальный адаптив под мелкие экраны */
+      @media (max-width: 768px) {
+        .hero__title {
+          font-size: 32px;
+        }
+        
+        .hero__subtitle {
+          font-size: 16px;
+        }
+        
+        .hero__text {
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .concerts__box {
+          padding: 20px;
+        }
+      
+        /* Скрываем десктопную шапку таблицы */
+        .concerts__header {
+          display: none;
+        }
+      
+        /* Превращаем каждый ряд в вертикальный блок */
+        .concerts__row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+          padding: 20px 0;
+        }
+      
+        .concerts__col {
+          width: 100%;
+          padding-right: 0;
+        }
+      
+        /* Добавим текстовые маркеры перед контентом на мобилках */
+        .concerts__col--seats::before {
+          content: "Місць: ";
+          color: var(--text-gray);
+        }
+      
+        .concerts__col--date::before {
+          content: "Дата: ";
+          color: var(--text-gray);
+        }
+      
+        .concerts__col--action {
+          text-align: left;
+          margin-top: 5px;
+        }
+        
+        .concerts__btn {
+          width: 100%; /* Кнопка на всю ширину на мобилке */
+          text-align: center;
+          
+        }
+        
+      }
+
+      @media (max-width: 768px) {
+        .team__grid {
+          grid-template-columns: repeat(2, 1fr); /* На планшетах перестраиваем в 2 колонки */
+          gap: 20px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .team__grid {
+          grid-template-columns: 1fr; /* На мобилках выстраиваем карточки в 1 ряд */
+          max-width: 350px;           /* Чтобы карточка не была слишком растянутой на смартфонах */
+          margin: 0 auto;             /* Центрируем всю сетку */
+        }
+      }
+
+      /* ------------------------------------------------------------------------
+   Адаптив для блока About
+   ------------------------------------------------------------------------ */
+   @media (max-width: 768px) {
+    .about {
+      padding: 50px 0;
+    }
+  
+    /* На планшетах и мобилках отменяем обтекание, возвращаем блочный вид */
+    .about__media {
+      float: none;
+      width: 100%;
+      margin-left: 0;
+      margin-bottom: 25px;
+    }
+    
+    .about__title {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+   Последовательный адаптив для блока Contacts
+   ------------------------------------------------------------------------ */
+@media (max-width: 992px) {
+    .contacts__body {
+      flex-direction: column; /* Перестраиваем форму и карту друг под друга */
+      gap: 40px;
+    }
+  
+    .contacts__form,
+    .contacts__map-card {
+      width: 100%;
+      flex: none;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .contacts {
+      padding: 50px 0;
+    }
+  
+    .contacts__row {
+      flex-direction: column; /* На мелких экранах инпуты Имя и Email встают в стек */
+      gap: 20px;
+    }
+    
+    .contacts__btn {
+      width: 100%; /* Кнопка отправки на всю ширину на мобилке */
+      text-align: center;
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+   Адаптив для Footer (Desktop First)
+   ------------------------------------------------------------------------ */
+@media (max-width: 768px) {
+    .footer {
+      padding: 30px 0;
+    }
+  
+    .footer__row {
+      flex-direction: column; /* Перестраиваем элементы в столбик на мобилках */
+      align-items: center;
+      text-align: center;
+      gap: 15px;
+    }
+  
+    .footer__row--contacts {
+      justify-content: center;
+      margin-top: 5px;
+    }
+  
+    .footer__socials {
+      order: -1; /* Соцсети на мобилке станут выше копирайта */
+    }
+  }  /* Анимация hero__btn для мобилки — работает при наведении и тапе */
+  @media (max-width: 600px) {
+    .hero__btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%; /* Прячем блик слева за кнопкой */
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        #FEE227,
+        transparent
+      );
+      transform: skewX(-25deg);
+      transition: none;
+    }
+    .hero__btn:hover::before {
+      left: 150%;
+      transition: left 0.7s ease-in-out;
+    }
+  }
