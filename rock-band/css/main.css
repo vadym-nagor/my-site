@@ -179,7 +179,7 @@
         align-items: center; /* Центрируем контент по вертикали */
         
         /* Фоновое изображение со сценическим светом и наложением темного градиента для читаемости */
-        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('/rock-band/img/main-img.webp');
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),  url('../img/main-img.webp');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -695,6 +695,314 @@
     color: var(--text-gray);
     font-weight: 700;
   }
+
+  /* Блок для hero кнопки */
+.rock-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #1A1C24 0%, #24141A 100%);
+  color: #fff;
+  padding: 15px 25px;
+  border-radius: 8px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s ease-in-out;
+}
+
+/* Модификатор состояния блока (через одно подчеркивание) */
+.rock-toast_show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Элементы */
+.rock-toast__content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.rock-toast__icon {
+  font-size: 30px;
+}
+
+.rock-toast__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.rock-toast__title {
+  font-size: 18px;
+  margin: 0 0 5px 0;
+  font-weight: 700;
+}
+
+.rock-toast__desc {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Блок модалки */
+.modal-order {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Модификатор открытия */
+.modal-order_open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Задний фон */
+.modal-order__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+}
+
+/* Окно с контентом */
+.modal-order__content {
+  position: relative;
+  background: linear-gradient(135deg, #1A1C24 0%, #24141A 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  max-width: 450px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  z-index: 2001;
+  transform: scale(0.8);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-order_open .modal-order__content {
+  transform: scale(1);
+}
+
+/* Кнопка закрытия */
+.modal-order__close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.modal-order__close:hover {
+  opacity: 1;
+}
+
+/* Шапка формы */
+.modal-order__header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.modal-order__title {
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 8px 0;
+}
+
+.modal-order__subtitle {
+  font-size: 14px;
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* Поля формы */
+.modal-order__field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.modal-order__label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+.modal-order__input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 12px 15px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 15px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.modal-order__input:focus {
+  outline: none;
+  border-color: #ff4500; /* Вогняний фокус */
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Блок модалки успеха */
+.modal-success {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2100; /* Чуть выше, чем форма */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Модификатор открытия */
+.modal-success_open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Размытие фона */
+.modal-success__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+/* Контент по центру */
+.modal-success__content {
+  position: relative;
+  background: linear-gradient(135deg, #1A1C24 0%, #24141A 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  z-index: 2101;
+  transform: scale(0.7);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-success_open .modal-success__content {
+  transform: scale(1);
+}
+
+/* Крестик закрытия */
+.modal-success__close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.modal-success__close:hover {
+  opacity: 1;
+}
+
+/* Тело контента */
+.modal-success__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-success__icon {
+  font-size: 55px;
+  margin-bottom: 15px;
+}
+
+.modal-success__title {
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+  letter-spacing: 1px;
+}
+
+.modal-success__desc {
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* Кнопка отправки */
+.modal-order__submit-btn {
+  width: 100%;
+  background: #ff4500;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 0.2s ease, transform 0.1s ease;
+  margin-top: 10px;
+}
+
+.modal-order__submit-btn:hover {
+  background: #e03d00;
+}
+
+.modal-order__submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* Блокировка скролла страницы */
+body.body_modal-open {
+  overflow: hidden;
+}
+
+/* Кнопка и её состояние вспышки */
+.hero__btn_flash::after {
+  /* код анимации вспышки */
+}
       /* 5. Адаптивные медиа-запросы (Media Queries) */
 
    @media (max-width: 768px) {
